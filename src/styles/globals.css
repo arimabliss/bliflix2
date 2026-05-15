@@ -1,0 +1,376 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-clash: var(--font-heading);
+}
+
+html,
+body,
+:root {
+  height: 100%;
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 6%;
+    --foreground: 210 40% 96%;
+    --card: 0 0% 9%;
+    --card-foreground: 210 40% 96%;
+    --popover: 0 0% 9%;
+    --popover-foreground: 210 40% 96%;
+    --primary: 0 0% 88%;
+    --primary-foreground: 0 0% 8%;
+    --secondary: 0 0% 13%;
+    --secondary-foreground: 210 40% 96%;
+    --muted: 0 0% 13%;
+    --muted-foreground: 215 10% 68%;
+    --accent: 0 0% 16%;
+    --accent-foreground: 210 40% 96%;
+    --destructive: 0 62% 45%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 0 0% 18%;
+    --input: 0 0% 18%;
+    --ring: 0 0% 88%;
+    --radius: 0.8rem;
+
+    --glass-bg: rgba(18, 18, 18, 0.86);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --gradient-primary: linear-gradient(135deg, #f0f1f3 0%, #9ea4ae 100%);
+    --gradient-hero: linear-gradient(180deg, transparent 0%, #0a0a0a 100%);
+    --shadow-card: 0 18px 44px rgba(0, 0, 0, 0.46);
+    --shadow-glow: 0 0 18px rgba(255, 255, 255, 0.035);
+  }
+}
+
+@layer utilities {
+  .glass-panel {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
+  }
+
+  .gradient-text {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .card-hover {
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .card-hover:hover {
+    transform: translateY(-5px) scale(1.015);
+    box-shadow: var(--shadow-card), var(--shadow-glow);
+  }
+
+  .soft-shine {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .soft-shine::after {
+    content: '';
+    position: absolute;
+    inset: -120% auto auto -20%;
+    width: 42%;
+    height: 280%;
+    transform: rotate(18deg);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.11), transparent);
+    animation: soft-sheen 7s linear infinite;
+    pointer-events: none;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    background-image:
+      radial-gradient(circle at 12% 12%, rgba(255, 255, 255, 0.05), transparent 22%),
+      radial-gradient(circle at 84% 18%, rgba(255, 255, 255, 0.03), transparent 16%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.015), rgba(255, 255, 255, 0));
+    background-attachment: fixed;
+  }
+}
+
+.video-wrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center top;
+
+  /* Keep it the right aspect-ratio */
+  aspect-ratio: 16/9;
+}
+
+.video-wrapper iframe {
+  /* Extend it beyond the viewport... */
+  width: 300%;
+  height: 100%;
+  /* ...and bring it back again */
+  margin-left: -100%;
+}
+
+.video-wrapper:before {
+  position: absolute;
+  z-index: 1;
+  content: '';
+  bottom: 0;
+  top: 0;
+  width: 100%;
+  /* background: -moz-radial-gradient(center, ellipse cover, transparent 10%, #000 100%);
+  background: -webkit-gradient(radial,
+      center center,
+      0,
+      center center,
+      100%,
+      color-stop(10%, transparent),
+      color-stop(100%, #000));
+  background: -webkit-radial-gradient(center, ellipse cover, transparent 10%, #000 100%);
+  background: -o-radial-gradient(center, ellipse cover, transparent 10%, #000 100%);
+  background: -ms-radial-gradient(center, ellipse cover, transparent 10%, #000 100%);
+  background: radial-gradient(ellipse at center, transparent 10%, #000 100%); */
+}
+
+.video-wrapper:after {
+  position: absolute;
+  z-index: 1;
+  content: '';
+  bottom: -2px;
+  width: 100%;
+  height: 150px;
+  background-color: rgba(17, 17, 17, 0);
+  background-image: -webkit-linear-gradient(top, rgba(17, 17, 17, 0), #111);
+}
+
+.panel {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  overflow-y: auto;
+  transition: transform 0.3s;
+}
+
+.btn {
+  display: inline-block;
+  font-weight: 400;
+  color: #fff;
+  text-align: center;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  background-color: transparent;
+  border: 1px solid transparent;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: 0.8rem;
+  transition:
+    color 0.15s ease-in-out,
+    background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out;
+}
+
+.seasons {
+  margin-top: 1rem;
+  margin-left: 1rem;
+}
+
+.seasons .btn {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 50rem;
+  border-color: rgba(255, 255, 255, 0.2);
+  display: inline-flex;
+  align-items: center;
+}
+
+.seasons .btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.panel .close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 3;
+  opacity: 1;
+  cursor: pointer;
+  transition: opacity 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.3rem;
+  padding: 0;
+  height: 2.3rem;
+}
+
+.panel .close svg {
+  width: 1.4rem;
+  height: 1.4rem;
+  color: #fff;
+}
+
+.panel.from-left {
+  width: 20rem;
+  transform: translateX(-20rem);
+}
+
+.panel.from-left.active {
+  transform: translateX(0);
+}
+
+.seasons {
+  margin-top: 1rem;
+  margin-left: 1rem;
+}
+
+.seasons .btn {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 50rem;
+  border-color: rgba(255, 255, 255, 0.2);
+  display: inline-flex;
+  align-items: center;
+}
+
+.seasons .btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.seasons .dropdown-menu {
+  background-color: #000;
+}
+
+.seasons.show .btn.dropdown-toggle::after {
+  transform: rotate(180deg);
+}
+
+.episodes {
+  list-style: none;
+  margin: 1rem 0 0 0;
+  padding: 0;
+}
+
+.episodes li a {
+  padding: 0.7rem 1rem;
+  display: block;
+  width: 100%;
+  color: rgba(255, 255, 255, 0.6);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.episodes li a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.episodes li a.active {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.05) 0,
+    rgba(255, 255, 255, 0.2) 100%
+  );
+  color: #fff;
+}
+
+.episodes li a.active:before {
+  font-family: 'Font Awesome 6 Free';
+  content: '\f04b';
+  font-weight: 900;
+  font-size: 0.9rem;
+  margin-right: 0.4rem;
+}
+
+.episodes li:nth-child(odd) a {
+  background-color: rgba(255, 255, 255, 0.03);
+}
+
+.episodes li:nth-child(odd) a:hover {
+  background-color: rgba(255, 255, 255, 0.09);
+  color: #fff;
+}
+
+.b-loading {
+  width: 80px;
+  height: 80px;
+  position: relative;
+  display: inline-block;
+}
+
+.b-loading div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border: 8px solid #fff;
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: #fff transparent transparent transparent;
+}
+
+.b-loading div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+
+.b-loading div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+
+.b-loading div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes soft-sheen {
+  0% {
+    transform: translateX(-120%) rotate(18deg);
+  }
+
+  100% {
+    transform: translateX(340%) rotate(18deg);
+  }
+}

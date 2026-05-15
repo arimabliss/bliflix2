@@ -1,0 +1,21 @@
+{
+  "background_color": "#17191c",
+  "dir": "ltr",
+  "display": "standalone",
+  "name": "KoWatch",
+  "orientation": "any",
+  "scope": "/",
+  "short_name": "KoWatch",
+  "start_url": "/",
+  "theme_color": "#17191c",
+  "id": "kowatch",
+  "description": "KoWatch streaming interface",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
